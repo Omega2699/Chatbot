@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Donor Prediction Chatbot</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+        }
+        h1 {
+            color: #333;
+        }
+        .chatbox {
+            max-width: 500px;
+            width: 100%;
+            background: #fff;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+        }
+        input, button {
+            width: calc(100% - 20px);
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        button {
+            background-color: #007BFF;
+            color: white;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+        .response {
+            margin-top: 20px;
+            color: #444;
+        }
+        a {
+            color: #007BFF;
+            text-decoration: none;
+        }
+        a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <h1>Donor Prediction Chatbot</h1>
+    <div class="chatbox">
+        <p>Ask a question or click the link below to open the full chatbot:</p>
+        <a href="https://my-flask-app-production-db02.up.railway.app/" target="_blank">Open Chatbot in Full Page</a>
+        <input type="text" id="userMessage" placeholder="Type your question here...">
+        <button onclick="sendMessage()">Submit</button>
+        <div class="response" id="response"></div>
+    </div>
+
+    <script>
+        async function sendMessage() {
+            const userMessage = document.getElementById("userMessage").value;
+            const responseDiv = document.getElementById("response");
+
+            if (!userMessage.trim()) {
+                responseDiv.innerHTML = "Please enter a message.";
+                return;
+            }
+
+            try {
+                const response = await fetch("https://my-flask-app-production-db02.up.railway.app/chat", {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify({ message: userMessage })
+                });
+
+                const data = await response.json();
+                responseDiv.innerHTML = `<strong>Response:</strong> ${data.response}`;
+            } catch (error) {
+                responseDiv.innerHTML = "Error communicating with the chatbot. Please try again.";
+            }
+        }
+    </script>
+</body>
+</html>
