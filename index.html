@@ -33,6 +33,13 @@
             padding: 15px;
             text-align: center;
             font-size: 18px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+        .chat-header img {
+            height: 50px; /* Adjust the height of the logo */
         }
         .chat-messages {
             padding: 20px;
@@ -93,7 +100,11 @@
 </head>
 <body>
     <div class="chat-container">
-        <div class="chat-header">Donor Prediction Chatbot</div>
+        <!-- Header with logo and text -->
+        <div class="chat-header">
+            <img src="https://biobridgeglobal.org/wp-content/uploads/2020/06/biobridge-logo.svg" alt="BioBridge Global Logo" />
+            Welcome to the Enhanced Donor Prediction Chatbot API!
+        </div>
         <div id="chatMessages" class="chat-messages"></div>
         <div class="chat-input">
             <input type="text" id="userMessage" placeholder="Type your message here..." />
